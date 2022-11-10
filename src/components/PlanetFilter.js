@@ -1,6 +1,6 @@
-function PlanetFilter() {
+function PlanetFilter({filter, setFilter}) {
   return (
-    <select>
+    <select value={filter} onChange={(e) => setFilter(e.target.value)}>
       <option value="all">All</option>
       <option value="only_planets">True Planets</option>
     </select>

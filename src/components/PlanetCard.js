@@ -1,15 +1,17 @@
-function PlanetCard() {
+function PlanetCard({planet}) {
+
+const {name, orbital_period_in_earth_days, fun_fact, is_planet} = planet
 
   return (
     <div className="white-border">
 
-      <h3>{/* planet name goes here */}</h3>
+      <h3>{name}</h3>
 
-      <p>Planet Orbital Period: {/* orbital period goes here */} days</p>
+      <p>Planet Orbital Period: {orbital_period_in_earth_days} days</p>
 
-      <p>{/* planet fact goes here */}</p>
+      <p>{fun_fact}</p>
 
-      <p>{/* conditionally render whether it is a planet here */}</p>
+      <p>{is_planet ? "Planet" : "Not a planet"}</p>
 
     </div>
   )

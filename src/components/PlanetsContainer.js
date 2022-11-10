@@ -1,9 +1,25 @@
+import { useState,useEffect } from 'react'
 import PlanetFilter from "./PlanetFilter"
 import PlanetCard from "./PlanetCard"
 
 function PlanetsContainer() {
+  const [planets, setPlanets] = useState([])
+  const [filter, setFilter] = useState('all')
 
-  const planetsURL = "http://localhost:4000/planets"
+  const planetsURL = "http://localhost:3000/planets"
+
+  useEffect(() => {
+    fetch(planetsURL)
+    .then(res => res.json())
+    .then(data => setPlanets(data))
+  },[])
+
+const filteredArray = planets.filter(planet => {
+  if (filter === 'all') return true
+  return planet.is_planet
+})
+
+  
 
   return (
     <div className="white-border-top">
@@ -13,11 +29,13 @@ function PlanetsContainer() {
       {/* You can delete the <p> tag once you've completed the deliverable */}
       <p>Use the provided URL to fetch the planets, map through and display them. Use the PlanetFilter component to allow users to filter true planets from planetoids.</p>
 
-      <PlanetFilter />
+      <PlanetFilter filter={filter} setFilter={setFilter}/>
 
       <div className="grid column-3">
 
-        {/* show your planets here! */}
+      {filteredArray.map(planet => {
+      return <PlanetCard key={planet.id} planet={planet}/>
+     })}
 
       </div>
 
